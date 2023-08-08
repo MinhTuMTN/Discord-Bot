@@ -2,6 +2,9 @@ import discord
 import thptqg_scores as thptqg
 import os
 from Bard import AsyncChatbot
+from keep_alive import keep_alive
+
+keep_alive()
 
 TOKEN = os.getenv('token')
 
