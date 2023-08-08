@@ -2,11 +2,15 @@ import discord
 import thptqg_scores as thptqg
 import google_bard
 import os
+from Bard import AsyncChatbot
 
 TOKEN = os.getenv('token')
 
 # Tạo client bot
 client = discord.Client(intents=discord.Intents.all())
+
+token_1 = os.getenv('bard_cookie_1')
+token_2 = os.getenv('bard_cookie_2')
 
 
 @client.event
@@ -31,9 +35,10 @@ async def on_message(message: discord.Message):
 
         await message.reply(content=text)
     elif message.content.startswith('!bard'):
-        question = message.content.split(' ')[1]
-        answer = google_bard.askBard(question)
-        await message.reply(content=answer)
+        chatbot = await AsyncChatbot.create(token_1, token_2)
+        question = ' '.join(message.content.split(' ')[1:])
+        response = await chatbot.ask(question)
 
+        await message.reply(content=response['content'])
 
 client.run(TOKEN)
