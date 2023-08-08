@@ -1,6 +1,5 @@
 import discord
 import thptqg_scores as thptqg
-import google_bard
 import os
 from Bard import AsyncChatbot
 
