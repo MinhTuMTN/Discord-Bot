@@ -1,5 +1,6 @@
 import discord
 import thptqg_scores as thptqg
+import google_bard
 import os
 
 TOKEN = os.getenv('token')
@@ -29,5 +30,10 @@ async def on_message(message: discord.Message):
             text = scores
 
         await message.reply(content=text)
+    elif message.content.startswith('!bard'):
+        question = message.content.split(' ')[1]
+        answer = google_bard.askBard(question)
+        await message.reply(content=answer)
+
 
 client.run(TOKEN)
